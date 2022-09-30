@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class GymVO {
-	 private int maxMem;
-	 private int checkIn;
+	private int gym_id;
+	private int maxMem;
+	private int checkIn;
 }

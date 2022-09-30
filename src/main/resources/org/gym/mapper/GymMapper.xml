@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.gym.mapper.GymMapper">
+	<update id="setMaxUser">
+		UPDATE gymChk  SET maxMem = #{maxUser}  where gym_id = 1
+	</update>
+
+	<select id="getMaxUser" resultType="int">
+		select maxMem from gymChk  where gym_id = 1 
+	</select>
+
+</mapper>

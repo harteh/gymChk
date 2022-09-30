@@ -1,10 +1,7 @@
 package org.gym.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import org.gym.VO.GymVO;
+import org.gym.service.GymService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,24 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import lombok.AllArgsConstructor;
+
 @Controller
+@AllArgsConstructor
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	private GymService service;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		/* 
-		logger.info("Welcome home! The client locale is {}.", locale);
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		String formattedDate = dateFormat.format(date);
-		model.addAttribute("serverTime", formattedDate );
-		*/
-		
-		logger.info("GYM Open!");
-		
-		
+		logger.info("Open page!");
 		return "home";
 	}
 	
@@ -41,15 +33,21 @@ public class HomeController {
 	 * @return page home, get to maxGym
 	 */
 	@PostMapping("/openProc")
-	public String openProc(@RequestParam("maxUser") int maxUser, Model model) {
+	public String openProc(@RequestParam("maxUser") int maxUser, Model model, GymVO gVO) {
 		logger.info("GYM 정원 설정 후 개장");
-		GymVO gym = new GymVO();
-		gym.setMaxMem(maxUser);
+		/* GymVO gym = new GymVO();
+		 * gym.setMaxMem(maxUser);
+		 * 
+		 * String maxGym = Integer.toString(gym.getMaxMem());
+		 * model.addAttribute("maxGym", maxGym); logger.info("최대인원 {}" ,maxGym);
+		 */
 		
-		String maxGym = Integer.toString(gym.getMaxMem());
+		logger.info("입력받은 정원 인원수:"+ maxUser );
+		service.openGym(maxUser);
+		
+		int maxGym = service.addUser(gVO);
+		logger.info("테스트 현재 정원: " + maxGym);
 		model.addAttribute("maxGym", maxGym);
-		logger.info("최대인원 {}" ,maxGym);
-		
 		return "home";
 	}
 
@@ -61,8 +59,12 @@ public class HomeController {
 	
 	
 	@PostMapping("/addProc")
-	public String addProc(Model model) {
-		logger.info("현재 사용 인원 +1 명, 회원증 로그인");
+	public String addProc(Model model, GymVO gVO) {
+//		logger.info("현재 사용 인원 +1 명, 회원증 로그인");
+		logger.info("DB 테스트");
+		
+		int result = service.addUser(gVO);
+		logger.info("테스트 현재 정원: " + result);
 		return "home";
 	}
 	
