@@ -3,3 +3,5 @@ create table gymChk (
   maxMem number,
   checkIn number
 );
+
+select * from gymChk;
