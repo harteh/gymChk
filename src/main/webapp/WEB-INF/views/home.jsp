@@ -35,7 +35,8 @@
 		<!-- 우측 안내 멘트 영역 -->
 		<div class="col-md-10 banner-sec">
 		    <div class="carousel-item active">
-		    	<img id="user1" class="d-block img-fluid userImg" src="/resources/img/run1.png" alt="running 1">
+		    	<img id="user1" class="d-block img-fluid userImg" src="/resources/img/user1.png" alt="running 1">
+		    	<img id="user10" class="d-block img-fluid userImg" src="/resources/img/user10.png" alt="user 10">
 	    	</div>
 	      	<div class="carousel-caption d-none d-md-block">
 	        	<div class="banner-text">
