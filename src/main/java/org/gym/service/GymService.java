@@ -15,6 +15,13 @@ public interface GymService {
 	void openGym(int maxUser);
 	
 	/**
+	 * 설정 된 정원 수를 반환받는다
+	 * @param gVO
+	 * @return int maxMem
+	 */
+	int getMaxMem(GymVO gVO);
+	
+	/**
 	 * 회원이 회원증을 찍고 입실하면
 	 * (컨트롤버튼: Check-in 클릭 시 동작) 
 	 * 현재 사용인원이 1명 늘어난다

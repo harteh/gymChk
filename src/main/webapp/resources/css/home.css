@@ -10,9 +10,7 @@ padding : 50px 0;
 }
 
 /* 배경 */
-.banner-sec{background:url(/resources/img/Asset1.png)  no-repeat left 40%; background-size:cover; min-height:640px; border-radius: 0 10px 10px 0; padding:0;}
-
-/* 추가일러스트 */
+.banner-sec{background:url(/resources/img/Asset11.png)  no-repeat left 40%; background-size:cover; min-height:640px; border-radius: 0 10px 10px 0; padding:0;}
 
 .container{background:#fff; border-radius: 10px; box-shadow:15px 20px 0px rgba(0,0,0,0.1);}
 .carousel-inner{border-radius:0 10px 10px 0;}
@@ -35,10 +33,22 @@ padding : 50px 0;
 .btn-set a{margin-top: 10px; }
 .btn-set a i {margin-right: 10px; }
 
-/* 우측 안내 영역  */
+/* 좌측 안내 영역  */
 #adminImg { height: 280px; opacity: 80%; transform: rotate(358deg);}
+
+/* 기초설정 */
+.fs12 {font-size: 12px;}
 
 /* 증가이미지 */
 .userImg { position: absolute; }
-#user1 { top: 220px; left: 25%;}
+#user1 { top: 290px; left: 25%;}
+#user2 { top: 350px; left: 10%;}
+#user3 { top: 470px; left: 21%;}
+#user4 { top: 380px; left: 85%;}
+#user5 { top: 500px; left: 75%;}
+#user6 { top: 220px; left: 47%;}
+#user7 { top: 140px; left: 10%;}
+#user8 { top: 220px; left: 70%;}
+#user9 { top: 120px; left: 33%;}
 #user10 { top: 45px; left: 77%;}
+#user11 { top: 310px; left: 54%;}

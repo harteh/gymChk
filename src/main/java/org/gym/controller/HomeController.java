@@ -1,5 +1,9 @@
 package org.gym.controller;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import org.gym.VO.GymVO;
 import org.gym.service.GymService;
 import org.slf4j.Logger;
@@ -22,7 +26,7 @@ public class HomeController {
 	private GymService service;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Locale locale, Model model) {
 		logger.info("Open page!");
 		return "home";
 	}
@@ -33,19 +37,18 @@ public class HomeController {
 	 * @return page home, get to maxGym
 	 */
 	@PostMapping("/openProc")
-	public String openProc(@RequestParam("maxUser") int maxUser, Model model, GymVO gVO) {
-		logger.info("GYM 정원 설정 후 개장");
-		/* GymVO gym = new GymVO();
-		 * gym.setMaxMem(maxUser);
-		 * 
-		 * String maxGym = Integer.toString(gym.getMaxMem());
-		 * model.addAttribute("maxGym", maxGym); logger.info("최대인원 {}" ,maxGym);
-		 */
+	public String openProc(@RequestParam("maxUser") int maxUser, Model model, GymVO gVO, Locale locale) {
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		String formattedDate = dateFormat.format(date);
 		
-		logger.info("입력받은 정원 인원수:"+ maxUser );
+		model.addAttribute("serverTime", formattedDate );
+		logger.info("GYM 정원 설정 후 개장");
+		
+		logger.info("입력받은 수:"+ maxUser +" 를 정원으로 설정");
 		service.openGym(maxUser);
 		
-		int maxGym = service.addUser(gVO);
+		int maxGym = service.getMaxMem(gVO);
 		logger.info("테스트 현재 정원: " + maxGym);
 		model.addAttribute("maxGym", maxGym);
 		return "home";
