@@ -34,7 +34,7 @@
 		<div class="col-md-2 login-sec">
 		    <h2 class="text-center">Check Now</h2>
 		    <p class="text-center">These people are currently using the GYM</p>
-		    <p class="text-center">오늘 누적 이용자 수  :  47명</p>
+		    <p class="text-center">오늘 누적 이용자 수  :  ${sumUser }명</p>
 		    
 		    <img id="adminImg" alt="user" src="/resources/img/preview.png">
 		    
@@ -58,7 +58,7 @@
 	    	</div>
 	      	<div class="carousel-caption d-none d-md-block">
 	        	<div class="banner-text">
-	            	<h2>Current number of users: 10</h2>
+	            	<h2>Current number of users: ${nowUser }명</h2>
 	            	
 	            	<c:set var="maxNum" value="${maxGym }" />
 	            	<c:choose>
@@ -92,7 +92,8 @@
 					<i class="fas fa-door-open"></i>  open
 				</button>
 			</form>
-			<form role="form" method='post' action="closeProc">
+			<form role="form" method='post' action="openProc">
+				<input type="hidden" name="maxUser" value="0">
 				<button type="submit" class="btn icon-btn btn-light mr-5" href="#"
 					data-toggle="tooltip" data-placement="top" title="오늘 하루가 끝났습니다">
 					<i class="fas fa-door-closed"></i>  close
