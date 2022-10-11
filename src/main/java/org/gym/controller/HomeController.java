@@ -26,8 +26,13 @@ public class HomeController {
 	private GymService service;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Model model, GymVO gVO) {
 		logger.info("Open page!");
+		
+		//누적 이용자 출력
+		int sumUser = service.getSumUser(gVO);
+		model.addAttribute("sumUser", sumUser);
+		
 		return "home";
 	}
 	
@@ -39,18 +44,21 @@ public class HomeController {
 	 */
 	@PostMapping("/openProc")
 	public String openProc(@RequestParam("maxUser") int maxUser, Model model, GymVO gVO, Locale locale) {
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
 		
 		logger.info("GYM 정원 설정 후 개장");
 		service.openGym(maxUser);
 		
-		int maxGym = service.getMaxMem(gVO);
-		logger.info("정원 조회: " + maxGym);
+		int maxGym = service.getMaxMem(gVO);	//시설 정원 출력
 		model.addAttribute("maxGym", maxGym);
+		
+		int sumUser = service.getSumUser(gVO);	//누적 이용자 수
+		model.addAttribute("sumUser", sumUser);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		String formattedDate = dateFormat.format(date);
+		model.addAttribute("serverTime", formattedDate );
+		
 		return "home";
 	}
 
@@ -64,18 +72,24 @@ public class HomeController {
 	 * @return
 	 */
 	@PostMapping("/addProc")
-	public String addProc(Model model, GymVO gVO) {
+	public String addProc(Model model, GymVO gVO, Locale locale) {
 		logger.info("현재 사용 인원 +1 명, 회원증 로그인");
 		
 		service.addUser(gVO);
 		service.sumUser(gVO);
 		int nowUser = service.getCheckInUser(gVO);	//현재 이용자 수
-		int sumUser = service.getSumUser(gVO);		//누적 이용자 수
 		int maxGym = service.getMaxMem(gVO);		//시설 정원
+		int sumUser = service.getSumUser(gVO);		//누적 이용자 수
 		
 		model.addAttribute("nowUser", nowUser);
-		model.addAttribute("sumUser", sumUser);
 		model.addAttribute("maxGym", maxGym);
+		model.addAttribute("sumUser", sumUser);
+		 
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		String formattedDate = dateFormat.format(date);
+		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
 	}
@@ -90,17 +104,23 @@ public class HomeController {
 	 * @return
 	 */
 	@PostMapping("/minusProc")
-	public String minusProc(Model model, GymVO gVO) {
+	public String minusProc(Model model, GymVO gVO, Locale locale) {
 		logger.info("현재 사용 인원 -1 명, 회원증 체크아웃");
 		
 		service.minusUser(gVO);
 		int nowUser = service.getCheckInUser(gVO);	//현재 이용자 수
-		int sumUser = service.getSumUser(gVO);		//누적 이용자 수
 		int maxGym = service.getMaxMem(gVO);		//시설 정원
+		int sumUser = service.getSumUser(gVO);	//누적 이용자 수
 		
 		model.addAttribute("nowUser", nowUser);
+		model.addAttribute("maxGym", maxGym);
 		model.addAttribute("sumUser", sumUser);
-		model.addAttribute("maxGym", maxGym);		
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		String formattedDate = dateFormat.format(date);
+		model.addAttribute("serverTime", formattedDate );
+
 		return "home";
 	}
 	

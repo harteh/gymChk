@@ -40,7 +40,7 @@ padding : 50px 0;
 .fs12 {font-size: 12px;}
 
 /* 증가이미지 */
-.userImg { position: absolute; }
+.userImg { position: absolute; display: block; }
 #user1 { top: 290px; left: 25%;}
 #user2 { top: 350px; left: 10%;}
 #user3 { top: 470px; left: 21%;}

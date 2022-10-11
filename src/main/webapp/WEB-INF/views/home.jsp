@@ -34,7 +34,7 @@
 		<div class="col-md-2 login-sec">
 		    <h2 class="text-center">Check Now</h2>
 		    <p class="text-center">These people are currently using the GYM</p>
-		    <p class="text-center">오늘 누적 이용자 수  :  ${sumUser }명</p>
+		    <p class="text-center">누적 이용자 수  :  ${sumUser }명</p>
 		    
 		    <img id="adminImg" alt="user" src="/resources/img/preview.png">
 		    
@@ -44,25 +44,25 @@
 		<!-- 우측 안내 멘트 영역 -->
 		<div class="col-md-10 banner-sec">
 		    <div class="carousel-item active">
-		    	<img id="user1" class="d-block img-fluid userImg" src="/resources/img/user1.png" alt="running 1">
-		    	<img id="user2" class="d-block img-fluid userImg" src="/resources/img/user2.png" alt="running 2">
-		    	<img id="user3" class="d-block img-fluid userImg" src="/resources/img/user3.png" alt="running 3">
-		    	<img id="user4" class="d-block img-fluid userImg" src="/resources/img/user4.png" alt="cycle 4">
-		    	<img id="user5" class="d-block img-fluid userImg" src="/resources/img/user5.png" alt="cycle 5">
-		    	<img id="user6" class="d-block img-fluid userImg" src="/resources/img/user6.png" alt="mat 6">
-		    	<img id="user7" class="d-block img-fluid userImg" src="/resources/img/user7.png" alt="dumb-bell 7">
-		    	<img id="user8" class="d-block img-fluid userImg" src="/resources/img/user8.png" alt="dumb-bell 8">
-		    	<img id="user9" class="d-block img-fluid userImg" src="/resources/img/user9.png" alt="dumb-bell 9">
-		    	<img id="user10" class="d-block img-fluid userImg" src="/resources/img/user10.png" alt="dumb-bell 10">
-		    	<img id="user11" class="d-block img-fluid userImg" src="/resources/img/user11.png" alt="jump-rope 11">
+		    	<img id="user1" class="img-fluid userImg" src="/resources/img/user1.png" alt="running 1">
+		    	<img id="user2" class="img-fluid userImg" src="/resources/img/user2.png" alt="running 2">
+		    	<img id="user3" class="img-fluid userImg" src="/resources/img/user3.png" alt="running 3">
+		    	<img id="user4" class="img-fluid userImg" src="/resources/img/user4.png" alt="cycle 4">
+		    	<img id="user5" class="img-fluid userImg" src="/resources/img/user5.png" alt="cycle 5">
+		    	<img id="user6" class="img-fluid userImg" src="/resources/img/user6.png" alt="mat 6">
+		    	<img id="user7" class="img-fluid userImg" src="/resources/img/user7.png" alt="dumb-bell 7">
+		    	<img id="user8" class="img-fluid userImg" src="/resources/img/user8.png" alt="dumb-bell 8">
+		    	<img id="user9" class="img-fluid userImg" src="/resources/img/user9.png" alt="dumb-bell 9">
+		    	<img id="user10" class="img-fluid userImg" src="/resources/img/user10.png" alt="dumb-bell 10">
+		    	<img id="user11" class="img-fluid userImg" src="/resources/img/user11.png" alt="jump-rope 11">
 	    	</div>
 	      	<div class="carousel-caption d-none d-md-block">
 	        	<div class="banner-text">
-	            	<h2>Current number of users: ${nowUser }명</h2>
 	            	
 	            	<c:set var="maxNum" value="${maxGym }" />
 	            	<c:choose>
 		            	<c:when test="${maxNum > 1}"> 
+			            	<h2>Current number of users: ${nowUser }명</h2>
 			            	<p class="mb-0">시설 정원: ${maxGym}명</p>
 			            	<p> 현재시간: ${serverTime }</p>
 		            	</c:when>

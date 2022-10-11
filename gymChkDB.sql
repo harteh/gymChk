@@ -13,6 +13,8 @@ insert into gymChk VALUES (1, 0, 0, 0);
 -- alter table gymChk add sumMem number;
 -- ALTER TABLE gymChk MODIFY (sumMem DEFAULT 0);
 
--- UPDATE gymChk  SET maxMem = 0, checkIn = 0  where gym_id = 1;
-UPDATE gymChk  SET maxMem = 24  where gym_id = 1;
-select maxMem from gymChk  where gym_id = 1;
+UPDATE gymChk  SET checkIn=checkIn+1  where checkin<maxMem and gym_id = 1;
+UPDATE gymChk  SET checkIn=checkIn-1  where checkin>0 and gym_id = 1;
+select * from gymChk;
+UPDATE gymChk  SET maxMem = 2, checkIn = 2  where gym_id = 1;
+select sumMem from gymChk  where gym_id = 1;
