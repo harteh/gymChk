@@ -43,7 +43,24 @@
 		
 		<!-- 우측 안내 멘트 영역 -->
 		<div class="col-md-10 banner-sec">
+		<c:set var="maxNum" value="${maxGym }" />	<!-- 정원  33-->
+		<c:set var="userNum" value="${nowUser }" />	<!-- 현재 이용자 수  -->
 		    <div class="carousel-item active">
+		    
+           	<c:choose>
+            	<c:when test="${maxNum > 1}"> 
+		    <%
+		    Integer max = (Integer)pageContext.getAttribute("maxNum");
+		    System.out.println(max);
+		    int chkN = max/10;
+		    System.out.println(chkN);
+		    
+		    for(int i=0; i<chkN; i++){
+		    	%>
+		    	<p>체크</p>
+		    	<%
+		    }
+		    %>
 		    	<img id="user1" class="img-fluid userImg" src="/resources/img/user1.png" alt="running 1">
 		    	<img id="user2" class="img-fluid userImg" src="/resources/img/user2.png" alt="running 2">
 		    	<img id="user3" class="img-fluid userImg" src="/resources/img/user3.png" alt="running 3">
@@ -55,19 +72,26 @@
 		    	<img id="user9" class="img-fluid userImg" src="/resources/img/user9.png" alt="dumb-bell 9">
 		    	<img id="user10" class="img-fluid userImg" src="/resources/img/user10.png" alt="dumb-bell 10">
 		    	<img id="user11" class="img-fluid userImg" src="/resources/img/user11.png" alt="jump-rope 11">
+		    	
+		    	</c:when></c:choose>
 	    	</div>
+	    	
 	      	<div class="carousel-caption d-none d-md-block">
 	        	<div class="banner-text">
-	            	
-	            	<c:set var="maxNum" value="${maxGym }" />
 	            	<c:choose>
-		            	<c:when test="${maxNum > 1}"> 
-			            	<h2>Current number of users: ${nowUser }명</h2>
+		            	<c:when test="${maxNum > 1 && userNum == null || userNum eq 0}"> 
+			            	<h2>현재 이용자가 없습니다.</h2>
+			            	<p class="mb-0">시설 정원: ${maxGym}명</p>
+			            	<p> 현재시간: ${serverTime }</p>
+		            	</c:when>
+		            	<c:when test="${maxNum > 1 && userNum >= 1}"> 
+			            	<h2>현재 이용자 수: ${userNum }명</h2>
 			            	<p class="mb-0">시설 정원: ${maxGym}명</p>
 			            	<p> 현재시간: ${serverTime }</p>
 		            	</c:when>
 		            	<c:otherwise>
-		            		<p>오픈 전입니다</p>
+		            		<!-- <p>오픈 전입니다</p> -->
+		            		<img id="closedSign" src="/resources/img/closedSign1.png" alt="closed sign 1">
 		            	</c:otherwise>
 	            	</c:choose>
 	        	</div>	
