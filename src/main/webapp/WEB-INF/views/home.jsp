@@ -48,31 +48,26 @@
 		    <div class="carousel-item active">
 		    
            	<c:choose>
-            	<c:when test="${maxNum > 1}"> 
+            	<c:when test="${maxNum > 1 && userNum >= 1}"> 
 		    <%
-		    Integer max = (Integer)pageContext.getAttribute("maxNum");
-		    System.out.println(max);
-		    int chkN = max/10;
-		    System.out.println(chkN);
+		    Integer max = (Integer)pageContext.getAttribute("maxNum");	//정원: 30
+		    Integer nowN = (Integer)pageContext.getAttribute("userNum");//현재 사용중인 인원 수: 10 => 이미지 4개 출력
+		    int chkN = max/10;											// 정원/이미지수: 3
+		    System.out.println(max+","+nowN+","+chkN);
 		    
-		    for(int i=0; i<chkN; i++){
+		    int loopEnd = nowN/chkN;
+		    int i; int j;
+		    		    
+		    //그림은 1~10을 반복하면서 생성된다.
+		    //체크수(chkN): 정원/10 이 1개의 단위가 된다. -> 체크수 * 10 까지가 최대치
+		    //체크수 + 1 될때 이미지가 하나씩 출력된다
+		    //i=그림명에 쓰일 인덱스
+		    for(i=1, j=0; j<loopEnd; i++, j++){
 		    	%>
-		    	<p>체크</p>
+		    	<img id='user<%=i %>' class="img-fluid userImg" src='/resources/img/user<%=i %>.png' alt="running 1">
 		    	<%
 		    }
 		    %>
-		    	<img id="user1" class="img-fluid userImg" src="/resources/img/user1.png" alt="running 1">
-		    	<img id="user2" class="img-fluid userImg" src="/resources/img/user2.png" alt="running 2">
-		    	<img id="user3" class="img-fluid userImg" src="/resources/img/user3.png" alt="running 3">
-		    	<img id="user4" class="img-fluid userImg" src="/resources/img/user4.png" alt="cycle 4">
-		    	<img id="user5" class="img-fluid userImg" src="/resources/img/user5.png" alt="cycle 5">
-		    	<img id="user6" class="img-fluid userImg" src="/resources/img/user6.png" alt="mat 6">
-		    	<img id="user7" class="img-fluid userImg" src="/resources/img/user7.png" alt="dumb-bell 7">
-		    	<img id="user8" class="img-fluid userImg" src="/resources/img/user8.png" alt="dumb-bell 8">
-		    	<img id="user9" class="img-fluid userImg" src="/resources/img/user9.png" alt="dumb-bell 9">
-		    	<img id="user10" class="img-fluid userImg" src="/resources/img/user10.png" alt="dumb-bell 10">
-		    	<img id="user11" class="img-fluid userImg" src="/resources/img/user11.png" alt="jump-rope 11">
-		    	
 		    	</c:when></c:choose>
 	    	</div>
 	    	
