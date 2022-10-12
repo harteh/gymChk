@@ -24,7 +24,9 @@
 	
 	<!-- 인원 수 변경 -->
 	<update id="addSum">
-		UPDATE gymChk  SET sumMem=sumMem+1  where gym_id = 1
+		<![CDATA[
+		UPDATE gymChk  SET sumMem=sumMem+1  where checkIn < maxMem and gym_id = 1
+		]]>
 	</update>
 	
 	<update id="addUser">

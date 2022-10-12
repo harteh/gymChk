@@ -46,17 +46,17 @@
 		<div class="col-md-10 banner-sec">
 		<c:set var="maxNum" value="${maxGym }" />	<!-- 정원  -->
 		<c:set var="userNum" value="${nowUser }" />	<!-- 현재 이용자 수  -->
+		<c:set var="chkN" value="${chkNum }" />	<!-- 체크용 수  -->
+		<c:set var="loopEnd" value="${loopNum }" />	<!-- 체크용 수  -->
 		    <div class="carousel-item active">
 		    
            	<c:choose>
             	<c:when test="${maxNum > 1 && userNum >= 1}"> 
 		    <%
-		    Integer max = (Integer)pageContext.getAttribute("maxNum");	//정원
-		    Integer nowN = (Integer)pageContext.getAttribute("userNum");//현재 사용중인 인원 수
-		    int chkN = max/10;											// 정원/이미지수
-		    //System.out.println(max+","+nowN+","+chkN);
-		    
-		    int loopEnd = nowN/chkN;
+		    Integer max = (Integer)pageContext.getAttribute("maxNum");	//정원	30
+		    Integer nowN = (Integer)pageContext.getAttribute("userNum");//현재 사용중인 인원 수	3
+		    Integer chkN = (Integer)pageContext.getAttribute("chkN");//체크용	30/10=3
+		    Integer loopEnd = (Integer)pageContext.getAttribute("loopEnd");//체크용	3/3=1
 		    int i; int j;
 		    		    
 		    for(i=1, j=0; j<loopEnd; i++, j++){

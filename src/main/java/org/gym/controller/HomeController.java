@@ -25,6 +25,12 @@ public class HomeController {
 	
 	private GymService service;
 	
+	/**
+	 * 첫화면: 누적 이용자수 출력
+	 * @param model
+	 * @param gVO
+	 * @return
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, GymVO gVO) {
 		logger.info("Open page!");
@@ -37,7 +43,8 @@ public class HomeController {
 	}
 	
 	/**
-	 * 정원을 입력받아 GymVO에 정원을 설정하고 페이지에 출력한다
+	 * 정원을 입력받아 GymVO에 정원을 설정하고
+	 * 정원, 누적이용자수, 현재시간 출력
 	 * open/close 같이 사용
 	 * @param model
 	 * @return page home, get to maxGym
@@ -66,7 +73,7 @@ public class HomeController {
 	 * 회원이 회원카드를 찍고 입실
 	 * 현재 인원 수, 누적 인원 수 증가
 	 * 현재 인원 수, 누적 인원 수, 시설 정원 조회
-	 * 
+	 * 정원, 누적이용자수, 현재시간,  현재 이용자 수 출력
 	 * @param model
 	 * @param gVO
 	 * @return
@@ -77,15 +84,29 @@ public class HomeController {
 		
 		service.addUser(gVO);
 		service.sumUser(gVO);
-		int nowUser = service.getCheckInUser(gVO);	//현재 이용자 수
-		int maxGym = service.getMaxMem(gVO);		//시설 정원
+		
 		int sumUser = service.getSumUser(gVO);		//누적 이용자 수
-		
-		model.addAttribute("nowUser", nowUser);
-		model.addAttribute("maxGym", maxGym);
 		model.addAttribute("sumUser", sumUser);
-		 
+		int maxGym = service.getMaxMem(gVO);		//시설 정원
+		model.addAttribute("maxGym", maxGym);
+
+		int nowUser = service.getCheckInUser(gVO);	//현재 이용자 수
+		model.addAttribute("nowUser", nowUser);
 		
+		int chkNum;
+		int loopNum;
+		if(maxGym>9) {
+			chkNum = maxGym/10;
+			loopNum = nowUser/chkNum;
+		} else {
+			chkNum = maxGym;		//체크용 수
+			loopNum = nowUser;
+		}
+		model.addAttribute("chkNum", chkNum);
+		model.addAttribute("loopNum", loopNum);
+		
+		logger.info(sumUser+"||"+maxGym+"|"+nowUser+"||"+chkNum+","+loopNum);
+		 
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
@@ -108,13 +129,26 @@ public class HomeController {
 		logger.info("현재 사용 인원 -1 명, 회원증 체크아웃");
 		
 		service.minusUser(gVO);
-		int nowUser = service.getCheckInUser(gVO);	//현재 이용자 수
-		int maxGym = service.getMaxMem(gVO);		//시설 정원
-		int sumUser = service.getSumUser(gVO);	//누적 이용자 수
-		
-		model.addAttribute("nowUser", nowUser);
-		model.addAttribute("maxGym", maxGym);
+
+		int sumUser = service.getSumUser(gVO);		//누적 이용자 수
 		model.addAttribute("sumUser", sumUser);
+		int maxGym = service.getMaxMem(gVO);		//시설 정원
+		model.addAttribute("maxGym", maxGym);
+		
+		int nowUser = service.getCheckInUser(gVO);	//현재 이용자 수
+		model.addAttribute("nowUser", nowUser);
+		
+		int chkNum;
+		int loopNum;
+		if(maxGym>9) {
+			chkNum = maxGym/10;
+			loopNum = nowUser/chkNum;
+		} else {
+			chkNum = maxGym;		//체크용 수
+			loopNum = nowUser;
+		}
+		model.addAttribute("chkNum", chkNum);
+		model.addAttribute("loopNum", loopNum);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
