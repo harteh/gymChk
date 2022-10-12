@@ -36,32 +36,29 @@
 		    <p class="text-center">These people are currently using the GYM</p>
 		    <p class="text-center">누적 이용자 수  :  ${sumUser }명</p>
 		    
-		    <img id="adminImg" alt="user" src="/resources/img/preview.png">
+		    <img id="adminImg" alt="user" src="/resources/img/preview.png"
+		    	data-toggle="tooltip" data-placement="top" title="운동하러 지금 갈까..">
 		    
 			<div class="copy-text">Created by BM</div>
 		</div>
 		
 		<!-- 우측 안내 멘트 영역 -->
 		<div class="col-md-10 banner-sec">
-		<c:set var="maxNum" value="${maxGym }" />	<!-- 정원  33-->
+		<c:set var="maxNum" value="${maxGym }" />	<!-- 정원  -->
 		<c:set var="userNum" value="${nowUser }" />	<!-- 현재 이용자 수  -->
 		    <div class="carousel-item active">
 		    
            	<c:choose>
             	<c:when test="${maxNum > 1 && userNum >= 1}"> 
 		    <%
-		    Integer max = (Integer)pageContext.getAttribute("maxNum");	//정원: 30
-		    Integer nowN = (Integer)pageContext.getAttribute("userNum");//현재 사용중인 인원 수: 10 => 이미지 4개 출력
-		    int chkN = max/10;											// 정원/이미지수: 3
-		    System.out.println(max+","+nowN+","+chkN);
+		    Integer max = (Integer)pageContext.getAttribute("maxNum");	//정원
+		    Integer nowN = (Integer)pageContext.getAttribute("userNum");//현재 사용중인 인원 수
+		    int chkN = max/10;											// 정원/이미지수
+		    //System.out.println(max+","+nowN+","+chkN);
 		    
 		    int loopEnd = nowN/chkN;
 		    int i; int j;
 		    		    
-		    //그림은 1~10을 반복하면서 생성된다.
-		    //체크수(chkN): 정원/10 이 1개의 단위가 된다. -> 체크수 * 10 까지가 최대치
-		    //체크수 + 1 될때 이미지가 하나씩 출력된다
-		    //i=그림명에 쓰일 인덱스
 		    for(i=1, j=0; j<loopEnd; i++, j++){
 		    	%>
 		    	<img id='user<%=i %>' class="img-fluid userImg" src='/resources/img/user<%=i %>.png' alt="running 1">
